@@ -34,10 +34,6 @@ resource "azurerm_virtual_machine" "airbus-azurevm" {
 
     os_profile_linux_config {
         disable_password_authentication = false
-        # ssh_keys {
-        #     path = "/home/devopsuser/.ssh/authorized_keys"
-        #     key_data = file("~/.ssh/azure.pub")
-        # }
     }
 
     tags = {
