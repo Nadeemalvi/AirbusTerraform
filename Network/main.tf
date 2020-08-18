@@ -72,7 +72,8 @@ resource "azurerm_subnet" "airbus-subnet" {
 }
 
 resource "azurerm_public_ip" "airbus-publicip" {
-    name = "airbus-publicIP"
+    count = 4
+    name = "airbus-publicIP-${count.index}"
     location = var.location
     resource_group_name = azurerm_network_security_group.airbus-nsg.resource_group_name
     allocation_method = "Static"
@@ -84,15 +85,16 @@ resource "azurerm_public_ip" "airbus-publicip" {
 }
 
 resource "azurerm_network_interface" "airbus-vminterface" {
-    name = "airbusvm-interface"
+    count = 4
+    name = "airbusvm-interface-${count.index}"
     location = azurerm_network_security_group.airbus-nsg.location
     resource_group_name = azurerm_network_security_group.airbus-nsg.resource_group_name
 
     ip_configuration {
-        name = "airbus-config1"
+        name = "airbus-config-${count.index}"
         subnet_id = azurerm_subnet.airbus-subnet.id
         private_ip_address_allocation = "Dynamic"
-        public_ip_address_id = "${azurerm_public_ip.airbus-publicip.id}"
+        public_ip_address_id = element(azurerm_public_ip.airbus-publicip.*.id, count.index)
     }
 
     tags = {

@@ -9,8 +9,8 @@ resource "azurerm_virtual_machine" "airbus-azurevm" {
     name = "airbus-westus-vm-${count.index}"
     location = var.location
     resource_group_name = var.resourceGroupName
-    network_interface_ids = ["${var.network_interface_id}"]
-    vm_size = "Standard_DS1_v2"
+    network_interface_ids = ["${var.network_interface_id}-${count.index}"]
+    vm_size = "Standard_D2s_v3"
 
     storage_image_reference {
         publisher = "Canonical"
