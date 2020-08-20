@@ -1,3 +1,4 @@
+#Terraform Script for Resouce Group
 provider "azurerm" {
   version         = "2.22.0"
   subscription_id = var.subscriptionID
