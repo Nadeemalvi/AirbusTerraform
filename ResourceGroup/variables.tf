@@ -2,7 +2,10 @@ variable "subscriptionID" {
     type = string
     description = "Varible for the Azure Subscription ID"
 }
-
+variable "tenantID" {
+    type = string
+    description = "Varible for the Azure Tenant ID"
+}
 variable "resourceGroupName" {
     type = string
     description = "Name of airbus resource group"
